@@ -69,7 +69,11 @@ function ExpenseInput(props) {
     setEnteredTitle("");
 
     setExpenseList((prevState) => {
-      return [...prevState, expense];
+      const newState = [...prevState, expense];
+
+      const storage = JSON.stringify(newState);
+      localStorage.setItem("storage", storage);
+      return newState;
     });
   };
 
@@ -111,7 +115,7 @@ function ExpenseInput(props) {
             min="2019-01-01"
             max="2022-12-31"
             onChange={(event) => {
-              const date = new Date(event.target.value);
+              const date = new Date(event.target.value).toISOString();
               setEnteredDate(date);
             }}
           />

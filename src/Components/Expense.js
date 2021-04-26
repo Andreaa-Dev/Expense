@@ -21,20 +21,42 @@ const AmountCard = styled.div`
   padding: 0.5rem;
 `;
 
+const Button = styled.button`
+  font-family: inherit;
+  border-radius: 12px;
+  width: 4rem;
+  height: 2rem;
+  margin-top: 1rem;
+
+  margin-left: 5rem;
+`;
+
+const ButtoNnAmount = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 function Expense(props) {
   const { date, title, amount, id } = props.expense;
 
-  const month = date.toLocaleString("en-US", { month: "long" });
-  const day = date.toLocaleString("en-US", { day: "2-digit" });
-  const year = date.getFullYear();
+  let year;
+  let month;
+  let day;
 
-  console.log(props);
+  year = new Date(date).getFullYear();
+  month = new Date(date).toLocaleString("default", { month: "long" });
+  day = new Date(date).getDate();
+  console.log("year", year);
+
   return (
     <CardStyle>
       {id}
       <ExpenseDate month={month} day={day} year={year} />
       <div>{title}</div>
-      <AmountCard>{amount}($)</AmountCard>
+      <ButtoNnAmount>
+        <AmountCard>{amount}($)</AmountCard>
+        <Button>Delete</Button>
+      </ButtoNnAmount>
     </CardStyle>
   );
 }

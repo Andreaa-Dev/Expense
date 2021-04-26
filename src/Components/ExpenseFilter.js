@@ -22,8 +22,9 @@ function ExpenseFilter(props) {
 
   const filterByYearHandler = (yearSelected) => {
     const result = expenseList.filter((expense) => {
-      return yearSelected === expense.date.getFullYear();
+      return yearSelected == expense.date.getFullYear();
     });
+
     setExpenseFilter(result);
   };
 

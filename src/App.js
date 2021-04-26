@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import react, { useState, useEffect } from "react";
 import "./App.css";
 
 import styled from "styled-components";
@@ -6,6 +6,8 @@ import styled from "styled-components";
 import CardExpense from "./Components/CardExpense";
 import Expense from "./Components/Expense";
 import ExpenseInput from "./Components/ExpenseInput";
+import ExpenseChart from "./Components/ExpenseChart";
+import AllExpense from "./Components/AllExpense";
 
 const Title = styled.h1`
   color: white;
@@ -27,9 +29,11 @@ function App() {
 
   const id = Math.random();
 
+  console.log("expense filter", expenseFilter);
   return (
     <div>
       <Title>EXPENSE</Title>
+
       <ExpenseInputStyled>
         <ExpenseInput
           setEnteredTitle={setEnteredTitle}
@@ -42,13 +46,18 @@ function App() {
         />
       </ExpenseInputStyled>
 
+      <AllExpense setExpenseList={setExpenseList} expenseList={expenseList} />
+      <ExpenseChart expenseList={expenseList} />
+
       <CardExpense
         expenseList={expenseList}
         setExpenseFilter={setExpenseFilter}
       >
-        {expenseList.map((expense) => {
-          return <Expense expense={expense} id={id} />;
-        })}
+        {expenseFilter.length === 0
+          ? "No expense found"
+          : expenseFilter.map((expense) => {
+              return <Expense expense={expense} id={id} />;
+            })}
       </CardExpense>
     </div>
   );
