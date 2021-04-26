@@ -11,6 +11,8 @@ const CardStyle = styled.div`
   padding: 0.5rem;
   align-items: center;
   font-size: 3rem;
+  border: 0.2rem black solid;
+  margin-bottom: 0.5rem;
 `;
 
 const AmountCard = styled.div`
@@ -20,17 +22,19 @@ const AmountCard = styled.div`
 `;
 
 function Expense(props) {
-  const { date, title, amount } = props;
+  const { date, title, amount, id } = props.expense;
 
   const month = date.toLocaleString("en-US", { month: "long" });
   const day = date.toLocaleString("en-US", { day: "2-digit" });
   const year = date.getFullYear();
 
+  console.log(props);
   return (
     <CardStyle>
+      {id}
       <ExpenseDate month={month} day={day} year={year} />
       <div>{title}</div>
-      <AmountCard>{amount}</AmountCard>
+      <AmountCard>{amount}($)</AmountCard>
     </CardStyle>
   );
 }

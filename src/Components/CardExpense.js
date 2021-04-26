@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ExpenseFilter from "./ExpenseFilter";
 
 const CardStyled = styled.div`
   border-radius: 12px;
@@ -9,8 +10,22 @@ const CardStyled = styled.div`
 `;
 
 function CardExpense(props) {
-  const { children } = props;
-  return <CardStyled>{children}</CardStyled>;
+  const {
+    children,
+    expenseList,
+    setExpenseList,
+    expenseFilter,
+    setExpenseFilter,
+  } = props;
+  return (
+    <CardStyled>
+      <ExpenseFilter
+        expenseList={expenseList}
+        setExpenseFilter={setExpenseFilter}
+      />
+      {children}
+    </CardStyled>
+  );
 }
 
 export default CardExpense;
