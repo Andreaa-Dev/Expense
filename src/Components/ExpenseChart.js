@@ -7,12 +7,18 @@ const ExpenseChartStyle = styled.div`
   background-color: #c1a1d3;
   padding: 0.5rem;
   margin-bottom: 2rem;
+  height: 14rem;
 `;
 
 const Style = styled.div`
   display: flex;
   flex-direction: table;
   justify-content: space-around;
+`;
+
+const H1 = styled.h1`
+  font-size: 2rem;
+  font-weight: bold;
 `;
 function ExpenseChart(props) {
   const { expenseList } = props;
@@ -41,7 +47,7 @@ function ExpenseChart(props) {
 
   return (
     <ExpenseChartStyle>
-      <h1>Expense Chart</h1>
+      <H1>Expense Monthly</H1>
       <Style>
         {dataChart.map((dataPoint) => (
           <ExpenseChartBar

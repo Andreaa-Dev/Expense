@@ -4,13 +4,19 @@ import styled from "styled-components";
 const ChartColum = styled.div`
   height: 100%;
   border: 1px solid black;
-  height: 50px;
+  height: 6rem;
+  width: 1.3rem;
   border-radius: 5px;
-  width: 1rem;
+
+  background-color: #b67171;
 `;
 
 const ChartFill = styled.div`
   background-color: #6f9eaf;
+`;
+
+const ChartTitle = styled.div`
+  font-weight: bold;
 `;
 
 function ExpenseChartBar(props) {
@@ -26,7 +32,7 @@ function ExpenseChartBar(props) {
         <ChartFill style={{ height: chartBarHeight }} />
       </ChartColum>
 
-      <div>{label}</div>
+      <ChartTitle>{label}</ChartTitle>
     </div>
   );
 }

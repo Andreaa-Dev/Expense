@@ -6,12 +6,13 @@ const AllExpenseStyle = styled.div`
   border-radius: 12px;
   background-color: #b4aee8;
   padding: 0.5rem;
-  align-items: center;
-  margin-bottom: 2rem;
+  margin: auto 4rem 2rem 2rem;
+
+  text-align: center;
 `;
 
 function AllExpense(props) {
-  const { setExpenseList, expenseList } = props;
+  const { setExpenseList, expenseList, deleteHandler, id } = props;
 
   useEffect(() => {
     const storage = localStorage.getItem("storage");
@@ -25,7 +26,9 @@ function AllExpense(props) {
       <h1>All expense</h1>
 
       {expenseList.map((expense) => {
-        return <Expense expense={expense} />;
+        return (
+          <Expense expense={expense} deleteHandler={deleteHandler} id={id} />
+        );
       })}
     </AllExpenseStyle>
   );

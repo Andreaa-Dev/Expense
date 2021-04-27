@@ -11,11 +11,22 @@ import AllExpense from "./Components/AllExpense";
 
 const Title = styled.h1`
   color: white;
-  display: inline-block;
+  margin: 2rem auto 2.5rem auto;
 `;
 
 const ExpenseInputStyled = styled.div`
-  margin: 3rem auto 3rem auto;
+  float: left;
+  width: 25vw;
+  margin-left: 2rem;
+`;
+
+const ExpenseRow1 = styled.div`
+  display: flex;
+  flex-direction: table; ;
+`;
+const ExpenseChartStyle = styled.div`
+  width: 50vw;
+  margin-left: 15rem;
 `;
 
 function App() {
@@ -29,25 +40,44 @@ function App() {
 
   const id = Math.random();
 
-  console.log("expense filter", expenseFilter);
+  const deleteHandler = (deletedId) => {
+    const result = expenseList.filter((expense) => {
+      console.log("id", id);
+      console.log("deleted", deletedId);
+
+      return deletedId !== expense.id;
+    });
+    console.log("result", result);
+    setExpenseList(result);
+  };
+
   return (
     <div>
-      <Title>EXPENSE</Title>
+      <Title>EXPENSE TRACKER</Title>
 
-      <ExpenseInputStyled>
-        <ExpenseInput
-          setEnteredTitle={setEnteredTitle}
-          enteredTitle={enteredTitle}
-          setEnteredAmount={setEnteredAmount}
-          enteredAmount={enteredAmount}
-          setEnteredDate={setEnteredDate}
-          enteredDate={enteredDate}
-          setExpenseList={setExpenseList}
-        />
-      </ExpenseInputStyled>
+      <ExpenseRow1>
+        <ExpenseInputStyled>
+          <ExpenseInput
+            setEnteredTitle={setEnteredTitle}
+            enteredTitle={enteredTitle}
+            setEnteredAmount={setEnteredAmount}
+            enteredAmount={enteredAmount}
+            setEnteredDate={setEnteredDate}
+            enteredDate={enteredDate}
+            setExpenseList={setExpenseList}
+          />
+        </ExpenseInputStyled>
+        <ExpenseChartStyle>
+          <ExpenseChart expenseList={expenseList} />
+        </ExpenseChartStyle>
+      </ExpenseRow1>
 
-      <AllExpense setExpenseList={setExpenseList} expenseList={expenseList} />
-      <ExpenseChart expenseList={expenseList} />
+      <AllExpense
+        setExpenseList={setExpenseList}
+        expenseList={expenseList}
+        deleteHandler={deleteHandler}
+        id={id}
+      />
 
       <CardExpense
         expenseList={expenseList}

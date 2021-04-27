@@ -19,6 +19,8 @@ const AmountCard = styled.div`
   border-radius: 12px;
   background-color: #7868e6;
   padding: 0.5rem;
+  width: 10rem;
+  height: 3rem;
 `;
 
 const Button = styled.button`
@@ -31,13 +33,19 @@ const Button = styled.button`
   margin-left: 5rem;
 `;
 
-const ButtoNnAmount = styled.div`
+const ButtonAmount = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 40rem;
+`;
+
+const Title = styled.div`
+  margin-left: 0rem;
 `;
 
 function Expense(props) {
-  const { date, title, amount, id } = props.expense;
+  const { date, title, amount } = props.expense;
+  const { deleteHandler, id } = props;
 
   let year;
   let month;
@@ -47,16 +55,24 @@ function Expense(props) {
   month = new Date(date).toLocaleString("default", { month: "long" });
   day = new Date(date).getDate();
   console.log("year", year);
+  console.log("props", props);
 
+  console.log("id", id);
+  console.log("delete", deleteHandler);
   return (
     <CardStyle>
-      {id}
       <ExpenseDate month={month} day={day} year={year} />
-      <div>{title}</div>
-      <ButtoNnAmount>
+      <Title>{title}</Title>
+      <ButtonAmount>
         <AmountCard>{amount}($)</AmountCard>
-        <Button>Delete</Button>
-      </ButtoNnAmount>
+      </ButtonAmount>
+      <Button
+        onClick={(event) => {
+          deleteHandler(id);
+        }}
+      >
+        Delete
+      </Button>
     </CardStyle>
   );
 }
